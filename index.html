@@ -7,23 +7,61 @@
 <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Hind Siliguri',sans-serif;background:#0f0a14;color:#fff;overflow-x:hidden}
-.hero{height:100vh;background:linear-gradient(rgba(10,10,20,.55),rgba(10,10,20,.82)),url('assets/photo1.jpeg') center/cover;display:flex;justify-content:center;align-items:center;text-align:center;padding:20px}
-.hero h1{font-size:3.7rem;color:#ffd9ea}
+body{
+font-family:'Hind Siliguri',sans-serif;
+background:radial-gradient(circle at top,#4a1029 0%,#1b0b18 45%,#0d0710 100%);
+color:#fff6f8;
+overflow-x:hidden
+}
+.hero{
+height:100vh;
+background:linear-gradient(rgba(44,10,25,.55),rgba(15,5,12,.82)),url('assets/photo1.jpeg') center/cover;
+display:flex;justify-content:center;align-items:center;text-align:center;padding:20px
+}
+.hero h1{font-size:3.7rem;color:#ffd6e7;text-shadow:0 0 30px rgba(255,105,180,.35)}
 .hero p{font-size:1.2rem;max-width:800px;margin:auto;color:#f4dfe8}
-.btn{display:inline-block;margin-top:25px;padding:14px 28px;border-radius:40px;background:#ff6ea9;color:white;text-decoration:none}
+.btn{
+display:inline-block;margin-top:25px;padding:14px 28px;border-radius:40px;
+background:linear-gradient(135deg,#ff4f8b,#ff7aa8);
+color:white;text-decoration:none;
+box-shadow:0 10px 35px rgba(255,79,139,.35);
+transition:.4s
+}
+.btn:hover{transform:translateY(-4px)}
 .section{max-width:1000px;margin:auto;padding:90px 25px}
-.letter,.timeline-card{background:rgba(255,255,255,.08);backdrop-filter:blur(16px);padding:35px;border-radius:28px;box-shadow:0 10px 35px rgba(0,0,0,.35);margin-bottom:35px}
-.timeline-card h3{color:#ffb9d3}
+.letter,.timeline-card{
+background:rgba(255,255,255,.10);
+backdrop-filter:blur(18px);
+padding:35px;
+border-radius:28px;
+border:1px solid rgba(255,255,255,.12);
+box-shadow:0 15px 45px rgba(0,0,0,.35),0 0 30px rgba(255,105,180,.12);
+margin-bottom:35px
+}
+.timeline-card h3{color:#ff8ab5}
 .gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;padding:20px}
 .gallery img{width:100%;height:400px;object-fit:cover;border-radius:25px;transition:.4s}
 .gallery img:hover{transform:scale(1.03)}
-.final{padding:120px 20px;text-align:center;background:linear-gradient(180deg,#1b1325,#0f0a14)}
-.final h2{font-size:2.8rem;color:#ffe1ed}
+.final{padding:120px 20px;text-align:center;background:linear-gradient(180deg,#2b1020,#140810)}
+.final h2{font-size:2.8rem;color:#ffd6e7}
 .small{color:#d6c0ca;margin-top:15px}
 audio{width:320px;max-width:90%}
 .heart{position:fixed;color:#ff79b0;animation:float 10s linear infinite;pointer-events:none}
 @keyframes float{from{transform:translateY(100vh)}to{transform:translateY(-100px)}}
+
+.particle{
+position:fixed;
+pointer-events:none;
+z-index:-1;
+opacity:.4;
+animation:floatUp linear infinite;
+}
+@keyframes floatUp{
+from{transform:translateY(100vh) rotate(0deg);opacity:0}
+20%{opacity:.5}
+to{transform:translateY(-120px) rotate(360deg);opacity:0}
+}
+
 </style>
 </head>
 <body>
@@ -32,10 +70,12 @@ audio{width:320px;max-width:90%}
 <div>
 <h1>For My Dearest,<br>Sabiqunnahar Iqra ❤️</h1>
 <p>A little surprise for the girl who made my ordinary days extraordinary.</p>
+<p style="font-size:1.4rem;margin-top:20px;color:#ffd6e7;">❤️ Celebrating Our First Month Together ❤️</p>
+<p style="font-size:1.1rem;margin-top:15px;font-style:italic;">One month of togetherness, a lifetime of love ahead.</p>
 <a href="#letter" class="btn">Open Our Story ✨</a>
 <br><br>
-<audio controls autoplay loop>
-<source src="https://cdn.pixabay.com/download/audio/2023/05/17/audio_2696b703e4.mp3?filename=gentle-piano-for-love-148177.mp3">
+<audio id="bgMusic" loop preload="auto">
+<source src="assets/love-piano.mp3" type="audio/mpeg">
 </audio>
 </div>
 </section>
@@ -100,16 +140,21 @@ Forever to go...
 </section>
 
 <script>
-for(let i=0;i<40;i++){
- const h=document.createElement('div');
- h.className='heart';
- h.innerHTML='❤';
- h.style.left=Math.random()*100+'vw';
- h.style.fontSize=(12+Math.random()*20)+'px';
- h.style.animationDuration=(7+Math.random()*6)+'s';
- document.body.appendChild(h);
+const symbols=["❤","💕","💖","🌸","✨"];
+for(let i=0;i<60;i++){
+ const p=document.createElement("div");
+ p.className="particle";
+ p.innerHTML=symbols[Math.floor(Math.random()*symbols.length)];
+ p.style.left=Math.random()*100+"vw";
+ p.style.fontSize=(12+Math.random()*28)+"px";
+ p.style.animationDuration=(8+Math.random()*12)+"s";
+ p.style.animationDelay=Math.random()*10+"s";
+ document.body.appendChild(p);
 }
+const music=document.getElementById("bgMusic");
+window.addEventListener("load",()=>{music.play().catch(()=>{});});
+document.addEventListener("click",()=>{music.play().catch(()=>{});},{once:true});
+document.addEventListener("touchstart",()=>{music.play().catch(()=>{});},{once:true});
 </script>
-
 </body>
 </html>
